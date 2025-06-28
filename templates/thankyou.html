@@ -1,26 +1,328 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>🌱 Glitch Bloom Unlocked</title>
-    <link rel="stylesheet" href="/static/css/style.css">
-</head>
-<body>
-    <div class="reward-screen">
-        <h1>✨ RARE SEED UNLOCKED ✨</h1>
-        <p>Your support has stabilized a new anomaly.</p>
-        <p>A rare Glitch Bloom seed has been planted in your name.</p>
-        <canvas id="rewardCanvas" width="64" height="64"></canvas>
-        <a href="/" class="glitch-button">Return to Garden</a>
-    </div>
+{% extends "base.html" %}
 
-    <script>
-        const canvas = document.getElementById("rewardCanvas");
-        const ctx = canvas.getContext("2d");
-        const img = new Image();
-        img.src = "/static/sprites/glitch_bloom_sheet.png";
-        img.onload = () => {
-            ctx.drawImage(img, 2 * 64, 0, 64, 64, 0, 0, 64, 64);
-        };
-    </script>
-</body>
-</html>
+{% block title %}Thank You - Glitch Bloom{% endblock %}
+
+{% block content %}
+<div class="thankyou-container">
+    <div class="thankyou-content">
+        <div class="thankyou-header">
+            <div class="support-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+            <h1 class="glitch-text" data-text="THANK YOU">THANK YOU</h1>
+            <p class="support-subtitle">Your support feeds the digital garden</p>
+        </div>
+        
+        <div class="support-effects">
+            <div class="effect-item">
+                <i class="fas fa-dna"></i>
+                <h3>Mutation Boost</h3>
+                <p>Your support has triggered enhanced mutation probabilities in the garden</p>
+            </div>
+            
+            <div class="effect-item">
+                <i class="fas fa-scroll"></i>
+                <h3>Rare Lore Echo</h3>
+                <p>A special lore echo has been added to the archive in your honor</p>
+            </div>
+            
+            <div class="effect-item">
+                <i class="fas fa-seedling"></i>
+                <h3>Garden Growth</h3>
+                <p>The garden recognizes your contribution and will flourish accordingly</p>
+            </div>
+        </div>
+        
+        <div class="supporter-message">
+            <div class="message-box">
+                <div class="message-header">
+                    <i class="fas fa-terminal"></i>
+                    System Message
+                </div>
+                <div class="message-content">
+                    <p class="echo-text">
+                        "The code acknowledges your presence. In the digital soil, something new stirs..."
+                    </p>
+                    <p class="message-meta">
+                        - Generated at {{ moment().format('YYYY-MM-DD HH:mm:ss') }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="return-actions">
+            <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg glow-button">
+                <i class="fas fa-home"></i>
+                Return to Garden
+            </a>
+            
+            <a href="{{ url_for('archive') }}" class="btn btn-outline-light btn-lg">
+                <i class="fas fa-archive"></i>
+                View Lore Archive
+            </a>
+        </div>
+        
+        <div class="social-share">
+            <p>Share the glitch garden with others:</p>
+            <div class="share-buttons">
+                <a href="https://twitter.com/intent/tweet?text=I just supported the Glitch Bloom autonomous pixel garden! 🌱✨&url={{ request.url_root }}" 
+                   target="_blank" class="share-btn twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.reddit.com/submit?url={{ request.url_root }}&title=Glitch Bloom - Autonomous Passive Income Pixel Garden" 
+                   target="_blank" class="share-btn reddit">
+                    <i class="fab fa-reddit"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.thankyou-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0A0A0A 0%, #1a1a2e 50%, #16213e 100%);
+    padding: 2rem;
+}
+
+.thankyou-content {
+    max-width: 800px;
+    text-align: center;
+    color: white;
+}
+
+.thankyou-header {
+    margin-bottom: 3rem;
+}
+
+.support-icon {
+    font-size: 4rem;
+    color: #FF0080;
+    margin-bottom: 1rem;
+    animation: heartBeat 2s infinite;
+}
+
+.thankyou-header h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.support-subtitle {
+    font-size: 1.2rem;
+    color: #00FF41;
+    margin-bottom: 0;
+}
+
+.support-effects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.effect-item {
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid #00FF41;
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+}
+
+.effect-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 255, 65, 0.3);
+}
+
+.effect-item i {
+    font-size: 2.5rem;
+    color: #00FF41;
+    margin-bottom: 1rem;
+}
+
+.effect-item h3 {
+    color: #FF0080;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.effect-item p {
+    color: #ccc;
+    line-height: 1.6;
+}
+
+.supporter-message {
+    margin: 3rem 0;
+}
+
+.message-box {
+    background: rgba(138, 43, 226, 0.1);
+    border: 2px solid #8A2BE2;
+    border-radius: 12px;
+    overflow: hidden;
+    animation: pulseGlow 3s infinite alternate;
+}
+
+.message-header {
+    background: #8A2BE2;
+    color: white;
+    padding: 1rem;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.message-content {
+    padding: 2rem;
+}
+
+.echo-text {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: #00FF41;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.message-meta {
+    color: #888;
+    font-size: 0.9rem;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.return-actions {
+    margin: 3rem 0;
+}
+
+.return-actions .btn {
+    margin: 0 1rem 1rem;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.glow-button {
+    animation: buttonGlow 2s infinite alternate;
+}
+
+.social-share {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #333;
+}
+
+.social-share p {
+    color: #ccc;
+    margin-bottom: 1rem;
+}
+
+.share-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.share-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1.5rem;
+}
+
+.share-btn.twitter {
+    background: #1DA1F2;
+}
+
+.share-btn.reddit {
+    background: #FF4500;
+}
+
+.share-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.05); }
+}
+
+@keyframes pulseGlow {
+    from {
+        box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+    }
+    to {
+        box-shadow: 0 0 20px rgba(138, 43, 226, 0.8);
+    }
+}
+
+@keyframes buttonGlow {
+    from {
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+    to {
+        box-shadow: 0 0 15px rgba(0, 123, 255, 0.8);
+    }
+}
+
+@media (max-width: 768px) {
+    .thankyou-header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .support-effects {
+        grid-template-columns: 1fr;
+    }
+    
+    .return-actions .btn {
+        display: block;
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Add entrance animations
+    const elements = document.querySelectorAll('.effect-item, .message-box, .return-actions');
+    elements.forEach((el, index) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 0.6s ease-out';
+        
+        setTimeout(() => {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+        }, (index + 1) * 200);
+    });
+    
+    // Trigger confetti effect
+    if (typeof confetti === 'function') {
+        setTimeout(() => {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#00FF41', '#FF0080', '#8A2BE2']
+            });
+        }, 1000);
+    }
+});
+</script>
+{% endblock %}

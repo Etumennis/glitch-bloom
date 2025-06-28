@@ -1,0 +1,142 @@
+
+=======================================================
+ESCAPE THE GLITCH: FULL PROJECT SUMMARY
+=======================================================
+
+🧠 OVERVIEW
+Escape the Glitch is a mystery puzzle adventure game built in Python using Pygame. Inspired by glitch-core aesthetics and memory-based mechanics, the game challenges players to navigate unstable environments, decode corrupted lore, and solve puzzles warped by broken logic. It rewards observation, experimentation, and repetition—with secrets and deeper meanings emerging only on subsequent playthroughs.
+
+=======================================================
+🎮 GAME STRUCTURE & ROOM DESIGN
+=======================================================
+
+ROOM 1: GLITCH SCANNER
+- Players use a handheld scanner to navigate invisible or flickering paths.
+- Glitches appear and disappear at adjustable flicker rates.
+- Puzzle resets if player steps off the valid path.
+- Scanner timer reintroduced for added tension.
+
+ROOM 2: MAZE + PITFALL TRAP
+- Maze randomizes each time the room is entered.
+- Falling into pitfalls three times causes a full reset with a new maze.
+- Shortcuts and fake exits are introduced for experienced players and reruns.
+
+ROOM 3: MEMORY GLITCH
+- A room filled with shadowy tiles that only stabilize when remembered in the correct order.
+- Echo shadows retrace previous footsteps or prior failed runs.
+- Terminals and hidden objects appear only when phase memory is aligned.
+- Lore deeply tied to recursion, memory, and distortion.
+
+ROOM 4: TELEPORTING OBJECTS
+- Objects flicker, vanish, and reappear unpredictably.
+- Cooperation is key in multiplayer or strategic solo patterns.
+- Puzzle solutions require timing and prediction, not reaction alone.
+
+ROOM 5: DESYNCED REALITY
+- Player interactions do not match visual/auditory feedback.
+- Buttons trigger events that happen retroactively.
+- Echo puzzles include shadows of previous actions affecting the environment.
+
+ROOM 6: FINAL CONVERGENCE
+- A sigil puzzle using elements and clues gathered throughout previous rooms.
+- Player completes an abstract pattern to "stabilize the glitch."
+- If all lore and animals are found with no deaths, a secret ending is triggered.
+
+=======================================================
+🦊 HIDDEN ANIMALS SYSTEM
+=======================================================
+
+- 25 hidden animals are scattered across the game world.
+- Each animal:
+    - Has a unique appearance in pixel art
+    - Is revealed through indirect cues and glitchy visuals
+    - Unlocks part of the deeper narrative or triggers a hidden achievement
+    - Features a corresponding cryptic lore line
+- Confirmed animal visuals: Ferret, Cat, Stag, Owl, Crow, Rabbit, Turtle, Snake, Fox, Bat, Raccoon, Gecko, Moth, Koi Fish
+
+=======================================================
+📜 LORE TERMINALS & SECRET NARRATIVE
+=======================================================
+
+- Lore terminals are found in each room and the main menu.
+- Some terminals are corrupted or hidden until specific actions are taken.
+- A perfect run (no deaths + all animals + all lore) reveals a final cryptic sentence:
+  “The stag sees. The eye closes.”
+
+Examples of terminal lore lines:
+- “They built it to contain what couldn’t be erased.”
+- “The light lied. It followed anyway.”
+- “Do you remember me?”
+
+=======================================================
+🏆 ACHIEVEMENTS & REWARDS
+=======================================================
+
+- Shape system: Completing the game unlocks new player forms.
+- NG++ mode becomes available after completing the game twice.
+- Achievements include:
+    - Finding all animals
+    - All terminal entries
+    - Completing the game with no deaths
+    - Alternate form usage
+
+=======================================================
+🎙️ VOICE LINE SYSTEM
+=======================================================
+
+- Female voice actor-focused script pack created, designed to support neurodivergent talents.
+- All lines structured with:
+    - Scene context
+    - Emotional tone
+    - Recording notes
+- Two voice packs:
+    1. Main game
+    2. NG++ corrupted mode (contradictory, gaslighted, sinister)
+
+Key voice examples:
+- “Scanner system online.”
+- “You strayed again.”
+- “You remember wrong.”
+- “You were the glitch.”
+
+=======================================================
+🎞️ TRAILER & PROMOTIONAL MATERIALS
+=======================================================
+
+- Trailer script (1:10 runtime) completed
+- Scene-by-scene timing chart
+- Placeholder still image pack + teaser animal pack
+- Final enhanced visuals with glitch overlays
+- Call to action: "Uncover the fragments. Embrace the glitch."
+
+=======================================================
+🎨 VISUAL DESIGN
+=======================================================
+
+- All UI assets follow a dark purple glitch style.
+- Core icon: Stag + Eye symbol (used in splash, banners, icon)
+- Custom pixel-art main menu, background, terminals, and lore cards.
+- Every screen may hide a secret, echo, or hint.
+
+=======================================================
+📦 DEPLOYMENT
+=======================================================
+
+- Game built for Windows (.exe), macOS (.dmg), and Linux (.tar.gz)
+- README.txt and LAUNCH_INSTRUCTIONS.txt provided
+- GitHub Actions script for versioning and deployment automation
+
+=======================================================
+🔁 REPLAYABILITY & DEPTH
+=======================================================
+
+- NG++ unlocks new corrupted content, lore, visuals, and voice lines.
+- Hidden animals shift between runs.
+- Lore lines may contradict themselves.
+- Final ending only possible through complete perfect run.
+
+=======================================================
+🧠 PHILOSOPHY
+=======================================================
+
+Escape the Glitch is not just a puzzle game. It’s a metaphor for forgetting, remembering, and rewriting. It tells the story of the player's persistence and the world’s resistance. What begins as escape becomes exploration. What looks like corruption becomes intention. The glitch was always part of the message.

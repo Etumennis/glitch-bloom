@@ -1,14 +1,177 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Glitch Bloom</title>
-    <link rel="stylesheet" href="/static/css/style.css">
-</head>
-<body>
-    <div class="loading-screen">
-        <img src="/static/img/loading_screen.gif" alt="Loading...">
+{% extends "base.html" %}
+
+{% block title %}Glitch Bloom - Digital Garden{% endblock %}
+
+{% block content %}
+<div class="garden-container">
+    <!-- Garden Stats Panel -->
+    <div class="stats-panel">
+        <div class="stat-item">
+            <i class="fas fa-dna"></i>
+            <span class="stat-label">Mutations</span>
+            <span class="stat-value" id="mutation-count">{{ mutation_count }}</span>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-heart"></i>
+            <span class="stat-label">Supporters</span>
+            <span class="stat-value" id="supporter-level">{{ supporter_level }}</span>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-cloud-rain"></i>
+            <span class="stat-label">Weather</span>
+            <span class="stat-value" id="weather-status">
+                {% if weather_data %}
+                    {{ weather_data.weather.main }}
+                {% else %}
+                    Unknown
+                {% endif %}
+            </span>
+        </div>
     </div>
-    <canvas id="plantCanvas" width="64" height="64"></canvas>
-    <script src="/scripts/plant_animation.js"></script>
-</body>
-</html>
+    
+    <!-- Main Garden Area -->
+    <div class="garden-area" id="garden-canvas">
+        <!-- Garden Background -->
+        <div class="garden-bg"></div>
+        
+        <!-- Plants Container -->
+        <div class="plants-container" id="plants-container">
+            {% if garden_data and garden_data.plants %}
+                {% for plant in garden_data.plants %}
+                <div class="plant-sprite" 
+                     data-plant-id="{{ plant.id }}"
+                     data-plant-type="{{ plant.type }}"
+                     data-plant-stage="{{ plant.stage }}"
+                     style="left: {{ plant.x }}px; top: {{ plant.y }}px;">
+                    
+                    <!-- Plant Visual -->
+                    <div class="plant-visual stage-{{ plant.stage }}">
+                        <div class="plant-base"></div>
+                        <div class="plant-bloom"></div>
+                        
+                        {% if plant.mutations %}
+                            <div class="mutation-effects">
+                                {% for mutation in plant.mutations %}
+                                <div class="mutation-effect {{ mutation.type|lower|replace(' ', '-') }}"></div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Plant Info Tooltip -->
+                    <div class="plant-tooltip">
+                        <div class="tooltip-header">{{ plant.type|title }}</div>
+                        <div class="tooltip-stage">Stage: {{ plant.stage }}/5</div>
+                        {% if plant.mutations %}
+                            <div class="tooltip-mutations">
+                                Mutations: {{ plant.mutations|length }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <!-- Empty Garden Message -->
+                <div class="empty-garden">
+                    <div class="empty-message">
+                        <i class="fas fa-seedling glitch-icon"></i>
+                        <p>Garden initializing...</p>
+                        <p class="sub-message">Seeds are being planted in the digital soil.</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        
+        <!-- Weather Effects Overlay -->
+        <div class="weather-effects" id="weather-effects">
+            {% if weather_data and weather_data.weather.main == 'Rain' %}
+                <div class="rain-effect"></div>
+            {% elif weather_data and weather_data.weather.main == 'Snow' %}
+                <div class="snow-effect"></div>
+            {% elif weather_data and weather_data.weather.main == 'Thunderstorm' %}
+                <div class="storm-effect"></div>
+            {% endif %}
+        </div>
+        
+        <!-- Glitch Effects -->
+        <div class="glitch-scanlines"></div>
+    </div>
+    
+    <!-- Garden Info Panel -->
+    <div class="info-panel">
+        <div class="panel-header">
+            <i class="fas fa-info-circle"></i>
+            Garden Status
+        </div>
+        <div class="panel-content">
+            <div class="info-item">
+                <strong>Total Plants:</strong> 
+                <span id="plant-count">
+                    {% if garden_data and garden_data.plants %}
+                        {{ garden_data.plants|length }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </span>
+            </div>
+            <div class="info-item">
+                <strong>Garden Level:</strong> 
+                <span id="garden-level">
+                    {% if garden_data %}
+                        {{ garden_data.garden_level or 1 }}
+                    {% else %}
+                        1
+                    {% endif %}
+                </span>
+            </div>
+            <div class="info-item">
+                <strong>Total Blooms:</strong> 
+                <span id="total-blooms">
+                    {% if garden_data %}
+                        {{ garden_data.total_blooms or 0 }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </span>
+            </div>
+            {% if weather_data %}
+            <div class="info-item">
+                <strong>Temperature:</strong> {{ weather_data.temperature }}°C
+            </div>
+            <div class="info-item">
+                <strong>Location:</strong> {{ weather_data.city }}
+            </div>
+            {% endif %}
+        </div>
+        
+        <!-- Ko-fi Support Button -->
+        <div class="support-section">
+            <a href="https://ko-fi.com/escapetheglitch" target="_blank" class="kofi-button">
+                <i class="fas fa-coffee"></i>
+                Support the Garden
+            </a>
+            <p class="support-text">Support triggers rare mutations and lore echoes</p>
+        </div>
+    </div>
+</div>
+
+<!-- Auto-refresh notification -->
+<div id="refresh-notification" class="refresh-notification">
+    <i class="fas fa-sync-alt"></i>
+    Garden updated autonomously
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/garden.js') }}"></script>
+<script>
+    // Initialize garden with server data
+    const initialGardenData = {{ garden_data|tojson if garden_data else '{}' }};
+    const initialWeatherData = {{ weather_data|tojson if weather_data else '{}' }};
+    
+    // Start garden automation
+    window.addEventListener('DOMContentLoaded', function() {
+        initializeGarden(initialGardenData, initialWeatherData);
+    });
+</script>
+{% endblock %}

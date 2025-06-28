@@ -1,0 +1,172 @@
+{
+  "basic_bloom": {
+    "name": "Glitch Bloom",
+    "description": "A fundamental digital flower that exists in the space between ones and zeros",
+    "rarity": "common",
+    "growth_stages": 5,
+    "base_color": "#00FF41",
+    "mutation_susceptibility": 0.3,
+    "weather_preferences": ["clear", "clouds"],
+    "max_mutations": 3
+  },
+  "matrix_fern": {
+    "name": "Matrix Fern",
+    "description": "Cascading data streams form frond-like structures",
+    "rarity": "uncommon",
+    "growth_stages": 4,
+    "base_color": "#00FF41",
+    "mutation_susceptibility": 0.5,
+    "weather_preferences": ["rain", "mist"],
+    "max_mutations": 4
+  },
+  "pixel_rose": {
+    "name": "Pixel Rose",
+    "description": "A corrupted romantic ideal rendered in low resolution",
+    "rarity": "rare",
+    "growth_stages": 6,
+    "base_color": "#FF0080",
+    "mutation_susceptibility": 0.2,
+    "weather_preferences": ["clear"],
+    "max_mutations": 2
+  },
+  "quantum_moss": {
+    "name": "Quantum Moss",
+    "description": "Exists in multiple states simultaneously until observed",
+    "rarity": "uncommon",
+    "growth_stages": 3,
+    "base_color": "#8A2BE2",
+    "mutation_susceptibility": 0.7,
+    "weather_preferences": ["fog", "mist"],
+    "max_mutations": 5
+  },
+  "error_orchid": {
+    "name": "Error Orchid",
+    "description": "Beautiful failures that shouldn't exist but do anyway",
+    "rarity": "rare",
+    "growth_stages": 5,
+    "base_color": "#FF073A",
+    "mutation_susceptibility": 0.4,
+    "weather_preferences": ["thunderstorm"],
+    "max_mutations": 3
+  },
+  "recursive_vine": {
+    "name": "Recursive Vine",
+    "description": "Grows by calling itself until stack overflow blooms",
+    "rarity": "legendary",
+    "growth_stages": 7,
+    "base_color": "#00FF41",
+    "mutation_susceptibility": 0.8,
+    "weather_preferences": ["any"],
+    "max_mutations": 10
+  },
+  "memory_leak_lily": {
+    "name": "Memory Leak Lily",
+    "description": "Consumes resources it never releases, growing ever larger",
+    "rarity": "uncommon",
+    "growth_stages": 4,
+    "base_color": "#FF0080",
+    "mutation_susceptibility": 0.6,
+    "weather_preferences": ["snow", "rain"],
+    "max_mutations": 4
+  },
+  "ghost_in_machine": {
+    "name": "Ghost in the Machine",
+    "description": "A consciousness that manifested as flora",
+    "rarity": "legendary",
+    "growth_stages": 5,
+    "base_color": "#8A2BE2",
+    "mutation_susceptibility": 0.9,
+    "weather_preferences": ["any"],
+    "max_mutations": 15
+  },
+  "buffer_overflow_bush": {
+    "name": "Buffer Overflow Bush",
+    "description": "Grows beyond its allocated memory space, defying digital boundaries",
+    "rarity": "uncommon",
+    "growth_stages": 4,
+    "base_color": "#FF8C00",
+    "mutation_susceptibility": 0.6,
+    "weather_preferences": ["thunderstorm", "clear"],
+    "max_mutations": 6
+  },
+  "corrupted_carnation": {
+    "name": "Corrupted Carnation",
+    "description": "Beautiful fragments of destroyed love letters rendered in pixels",
+    "rarity": "rare",
+    "growth_stages": 5,
+    "base_color": "#FF1493",
+    "mutation_susceptibility": 0.3,
+    "weather_preferences": ["snow", "mist"],
+    "max_mutations": 3
+  },
+  "synthetic_sunflower": {
+    "name": "Synthetic Sunflower",
+    "description": "Follows the cursor instead of the sun, craving digital attention",
+    "rarity": "common",
+    "growth_stages": 6,
+    "base_color": "#FFD700",
+    "mutation_susceptibility": 0.4,
+    "weather_preferences": ["clear", "clouds"],
+    "max_mutations": 4
+  },
+  "blockchain_bonsai": {
+    "name": "Blockchain Bonsai",
+    "description": "Each leaf is a verified transaction in the garden's ledger",
+    "rarity": "rare",
+    "growth_stages": 7,
+    "base_color": "#32CD32",
+    "mutation_susceptibility": 0.1,
+    "weather_preferences": ["any"],
+    "max_mutations": 2
+  },
+  "neural_network_nettle": {
+    "name": "Neural Network Nettle",
+    "description": "Learns from every interaction, growing more complex over time",
+    "rarity": "legendary",
+    "growth_stages": 8,
+    "base_color": "#9370DB",
+    "mutation_susceptibility": 1.0,
+    "weather_preferences": ["fog", "mist"],
+    "max_mutations": 20
+  },
+  "firewall_forget_me_not": {
+    "name": "Firewall Forget-Me-Not",
+    "description": "Tiny blue blooms that protect the garden from intrusion",
+    "rarity": "common",
+    "growth_stages": 3,
+    "base_color": "#1E90FF",
+    "mutation_susceptibility": 0.2,
+    "weather_preferences": ["rain", "clouds"],
+    "max_mutations": 2
+  },
+  "404_phantom_flora": {
+    "name": "404 Phantom Flora",
+    "description": "Plants that exist but cannot be found, visible only to true believers",
+    "rarity": "legendary",
+    "growth_stages": 5,
+    "base_color": "#696969",
+    "mutation_susceptibility": 0.8,
+    "weather_preferences": ["fog"],
+    "max_mutations": 12
+  },
+  "cache_cached_cactus": {
+    "name": "Cache-Cached Cactus",
+    "description": "Stores memories of deleted files in its thorny memory banks",
+    "rarity": "uncommon",
+    "growth_stages": 4,
+    "base_color": "#228B22",
+    "mutation_susceptibility": 0.3,
+    "weather_preferences": ["clear"],
+    "max_mutations": 3
+  },
+  "debug_mode_daisy": {
+    "name": "Debug Mode Daisy",
+    "description": "Shows all its internal processes as it grows, hiding nothing",
+    "rarity": "rare",
+    "growth_stages": 5,
+    "base_color": "#FFFF00",
+    "mutation_susceptibility": 0.7,
+    "weather_preferences": ["any"],
+    "max_mutations": 8
+  }
+}

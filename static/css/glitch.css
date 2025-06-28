@@ -1,0 +1,739 @@
+/* Glitch Bloom CSS - Core Styles */
+
+:root {
+    --matrix-green: #00FF41;
+    --glitch-pink: #FF0080;
+    --electric-purple: #8A2BE2;
+    --deep-black: #0A0A0A;
+    --glitch-red: #FF073A;
+    --dark-gray: #1a1a1a;
+    --light-gray: #333333;
+}
+
+/* Base Styles */
+* {
+    box-sizing: border-box;
+}
+
+body.glitch-body {
+    margin: 0;
+    padding: 0;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    background: var(--deep-black);
+    color: var(--matrix-green);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Background Glitch Overlay */
+.glitch-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(90deg, transparent 98%, var(--matrix-green) 100%),
+        linear-gradient(0deg, transparent 98%, var(--glitch-pink) 100%);
+    background-size: 20px 20px, 40px 40px;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: -1;
+    animation: glitchShift 8s infinite;
+}
+
+/* Navigation Styles */
+.glitch-nav {
+    background: linear-gradient(90deg, var(--dark-gray), var(--light-gray));
+    border-bottom: 2px solid var(--matrix-green);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-brand.glitch-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--matrix-green) !important;
+}
+
+.navbar-brand i {
+    color: var(--glitch-pink);
+    margin-right: 0.5rem;
+}
+
+.glitch-text {
+    position: relative;
+    display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch-text::before {
+    animation: glitch-1 2s infinite;
+    color: var(--glitch-pink);
+    z-index: -1;
+}
+
+.glitch-text::after {
+    animation: glitch-2 2s infinite;
+    color: var(--electric-purple);
+    z-index: -2;
+}
+
+.glitch-nav-link {
+    color: var(--matrix-green) !important;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.glitch-nav-link:hover {
+    color: var(--glitch-pink) !important;
+    text-shadow: 0 0 10px var(--glitch-pink);
+}
+
+/* Garden Container */
+.garden-container {
+    display: grid;
+    grid-template-columns: 250px 1fr 250px;
+    grid-template-rows: auto 1fr;
+    height: calc(100vh - 76px);
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.stats-panel {
+    grid-column: 1;
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid var(--matrix-green);
+    border-radius: 8px;
+    padding: 1rem;
+    height: fit-content;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.stat-item i {
+    color: var(--glitch-pink);
+    margin-right: 0.5rem;
+    width: 20px;
+}
+
+.stat-label {
+    flex: 1;
+    font-size: 0.9rem;
+    color: var(--matrix-green);
+}
+
+.stat-value {
+    font-weight: 700;
+    color: white;
+    background: var(--electric-purple);
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    min-width: 30px;
+    text-align: center;
+}
+
+/* Garden Area */
+.garden-area {
+    grid-column: 2;
+    position: relative;
+    background: 
+        radial-gradient(circle at 30% 20%, rgba(0, 255, 65, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(255, 0, 128, 0.05) 0%, transparent 50%),
+        linear-gradient(180deg, #0A0A0A 0%, #0f0f0f 100%);
+    border: 2px solid var(--matrix-green);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.garden-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 98px,
+            rgba(0, 255, 65, 0.03) 100px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 98px,
+            rgba(255, 0, 128, 0.03) 100px
+        );
+}
+
+/* Plant Sprites */
+.plants-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.plant-sprite {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.plant-visual {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+.plant-base {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 16px;
+    background: var(--matrix-green);
+    border-radius: 4px 4px 0 0;
+}
+
+.plant-bloom {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    background: var(--glitch-pink);
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+/* Plant Growth Stages */
+.plant-visual.stage-0 .plant-base {
+    height: 8px;
+    background: #333;
+}
+
+.plant-visual.stage-1 .plant-base {
+    height: 16px;
+    background: var(--matrix-green);
+}
+
+.plant-visual.stage-2 .plant-base {
+    height: 24px;
+}
+
+.plant-visual.stage-2 .plant-bloom {
+    opacity: 0.3;
+    background: #666;
+}
+
+.plant-visual.stage-3 .plant-base {
+    height: 32px;
+}
+
+.plant-visual.stage-3 .plant-bloom {
+    opacity: 0.7;
+    background: var(--glitch-pink);
+    animation: bloomPulse 2s infinite;
+}
+
+.plant-visual.stage-4 .plant-base {
+    height: 40px;
+}
+
+.plant-visual.stage-4 .plant-bloom {
+    opacity: 1;
+    width: 16px;
+    height: 16px;
+    animation: bloomPulse 1.5s infinite;
+}
+
+.plant-visual.stage-5 .plant-base {
+    height: 48px;
+    box-shadow: 0 0 10px var(--matrix-green);
+}
+
+.plant-visual.stage-5 .plant-bloom {
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    animation: bloomPulse 1s infinite, bloomGlow 3s infinite alternate;
+}
+
+/* Mutation Effects */
+.mutation-effects {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.mutation-effect {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    animation: mutationGlow 2s infinite alternate;
+}
+
+.mutation-effect.purple-glitch {
+    background: radial-gradient(circle, transparent 60%, var(--electric-purple) 100%);
+    opacity: 0.3;
+}
+
+.mutation-effect.rain-bloom {
+    background: radial-gradient(circle, transparent 70%, var(--matrix-green) 100%);
+    opacity: 0.4;
+    animation: mutationGlow 1s infinite alternate;
+}
+
+/* Plant Tooltip */
+.plant-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: var(--matrix-green);
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--matrix-green);
+    font-size: 0.8rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+    white-space: nowrap;
+}
+
+.plant-sprite:hover .plant-tooltip {
+    opacity: 1;
+}
+
+/* Info Panel */
+.info-panel {
+    grid-column: 3;
+    background: rgba(255, 0, 128, 0.1);
+    border: 1px solid var(--glitch-pink);
+    border-radius: 8px;
+    padding: 1rem;
+    height: fit-content;
+}
+
+.panel-header {
+    color: var(--glitch-pink);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--glitch-pink);
+    font-size: 1.1rem;
+}
+
+.panel-header i {
+    margin-right: 0.5rem;
+}
+
+.info-item {
+    margin-bottom: 0.8rem;
+    padding: 0.3rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    font-size: 0.9rem;
+}
+
+.info-item strong {
+    color: var(--matrix-green);
+}
+
+/* Support Section */
+.support-section {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--glitch-pink);
+    text-align: center;
+}
+
+.kofi-button {
+    display: inline-block;
+    background: linear-gradient(45deg, var(--glitch-pink), var(--electric-purple));
+    color: white;
+    text-decoration: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.kofi-button:hover {
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 0, 128, 0.4);
+}
+
+.kofi-button i {
+    margin-right: 0.5rem;
+}
+
+.support-text {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: #ccc;
+    line-height: 1.4;
+}
+
+/* Weather Effects */
+.weather-effects {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.rain-effect {
+    background: linear-gradient(transparent 0%, var(--matrix-green) 100%);
+    width: 2px;
+    height: 20px;
+    position: absolute;
+    animation: rainFall 1s infinite linear;
+}
+
+.snow-effect {
+    background: white;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    position: absolute;
+    animation: snowFall 3s infinite linear;
+}
+
+.storm-effect {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    animation: lightning 0.1s infinite;
+}
+
+/* Glitch Scanlines */
+.glitch-scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 65, 0.03) 2px,
+        rgba(0, 255, 65, 0.03) 4px
+    );
+    pointer-events: none;
+    animation: scanlineShift 2s infinite linear;
+}
+
+/* Echo Terminal */
+.echo-terminal {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid var(--matrix-green);
+    border-radius: 8px;
+    padding: 1rem;
+    max-width: 400px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+    z-index: 1000;
+}
+
+.echo-terminal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.echo-prompt {
+    color: var(--electric-purple);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+.echo-text {
+    color: var(--matrix-green);
+    margin-top: 0.5rem;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+/* Loading Animation */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.loading-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loading-content {
+    text-align: center;
+    color: var(--matrix-green);
+}
+
+.glitch-loader {
+    margin-bottom: 2rem;
+}
+
+.loader-bars {
+    display: flex;
+    gap: 4px;
+}
+
+.loader-bars .bar {
+    width: 4px;
+    height: 40px;
+    background: var(--matrix-green);
+    animation: loaderPulse 1.2s infinite ease-in-out;
+}
+
+.loader-bars .bar:nth-child(1) { animation-delay: -1.1s; }
+.loader-bars .bar:nth-child(2) { animation-delay: -1.0s; }
+.loader-bars .bar:nth-child(3) { animation-delay: -0.9s; }
+.loader-bars .bar:nth-child(4) { animation-delay: -0.8s; }
+
+.loading-text {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+/* Refresh Notification */
+.refresh-notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--electric-purple);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+    transition: all 0.5s ease;
+    z-index: 1000;
+}
+
+.refresh-notification.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.refresh-notification i {
+    margin-right: 0.5rem;
+    animation: spin 1s infinite linear;
+}
+
+/* Empty Garden */
+.empty-garden {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #666;
+    text-align: center;
+}
+
+.empty-message i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--matrix-green);
+    opacity: 0.5;
+    animation: pulse 2s infinite;
+}
+
+.empty-message p {
+    margin: 0.5rem 0;
+}
+
+.sub-message {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .garden-container {
+        grid-template-columns: 200px 1fr 200px;
+    }
+}
+
+@media (max-width: 992px) {
+    .garden-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr auto;
+        height: auto;
+        min-height: calc(100vh - 76px);
+    }
+    
+    .stats-panel,
+    .info-panel {
+        grid-column: 1;
+    }
+    
+    .garden-area {
+        grid-column: 1;
+        height: 60vh;
+        min-height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .garden-container {
+        padding: 0.5rem;
+    }
+    
+    .echo-terminal {
+        bottom: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+    
+    .plant-sprite {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .glitch-text {
+        font-size: 0.9rem;
+    }
+}
+
+/* Animations */
+@keyframes glitchShift {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-2px); }
+    40% { transform: translateX(2px); }
+    60% { transform: translateX(-1px); }
+    80% { transform: translateX(1px); }
+}
+
+@keyframes glitch-1 {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-2px); }
+    40% { transform: translateX(2px); }
+    60% { transform: translateX(-1px); }
+    80% { transform: translateX(1px); }
+}
+
+@keyframes glitch-2 {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(1px); }
+    50% { transform: translateX(-1px); }
+    75% { transform: translateX(2px); }
+}
+
+@keyframes textGlitch {
+    0%, 100% { text-shadow: 0 0 5px currentColor; }
+    25% { text-shadow: -1px 0 0 var(--glitch-pink), 1px 0 0 var(--electric-purple); }
+    50% { text-shadow: 1px 0 0 var(--glitch-pink), -1px 0 0 var(--electric-purple); }
+    75% { text-shadow: 0 0 10px currentColor; }
+}
+
+@keyframes bloomPulse {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.2); }
+}
+
+@keyframes bloomGlow {
+    from { box-shadow: 0 0 5px var(--glitch-pink); }
+    to { box-shadow: 0 0 15px var(--glitch-pink), 0 0 25px var(--glitch-pink); }
+}
+
+@keyframes mutationGlow {
+    from { opacity: 0.1; }
+    to { opacity: 0.5; }
+}
+
+@keyframes rainFall {
+    from { top: -20px; }
+    to { top: 100%; }
+}
+
+@keyframes snowFall {
+    from { top: -10px; }
+    to { top: 100%; }
+}
+
+@keyframes lightning {
+    0%, 90%, 100% { opacity: 0; }
+    5%, 10% { opacity: 1; }
+}
+
+@keyframes scanlineShift {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(4px); }
+}
+
+@keyframes loaderPulse {
+    0%, 40%, 100% { transform: scaleY(0.4); }
+    20% { transform: scaleY(1.0); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
