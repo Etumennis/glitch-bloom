@@ -1,0 +1,21 @@
+
+.lore-echo {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 80%;
+    background: rgba(127, 0, 255, 0.15);
+    border: 1px solid #cc66ff;
+    padding: 10px 20px;
+    color: #cc66ff;
+    font-family: monospace;
+    font-size: 1rem;
+    text-align: center;
+    animation: flicker 2s infinite alternate;
+    backdrop-filter: blur(2px);
+}
+@keyframes flicker {
+    0% { opacity: 0.9; text-shadow: 0 0 2px #ff00ff; }
+    100% { opacity: 1; text-shadow: 0 0 4px #7f00ff; }
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🧠 Lore Echo Archive</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/lore_echo.css">
+    <style>
+        .archive {
+            padding: 40px;
+            text-align: center;
+        }
+        .archive h1 {
+            color: #cc66ff;
+            margin-bottom: 10px;
+        }
+        .archive p {
+            color: #aaa;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        .echo-list {
+            text-align: left;
+            margin: auto;
+            max-width: 600px;
+            color: #cc66ff;
+            font-family: monospace;
+            border-left: 2px solid #7f00ff;
+            padding-left: 20px;
+        }
+        .echo-list li {
+            margin: 10px 0;
+        }
+        .back-button, .reset-button, .export-button {
+            margin-top: 20px;
+            display: inline-block;
+            background: #7f00ff;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border: 2px solid #cc66ff;
+            border-radius: 8px;
+            margin-right: 10px;
+        }
+        .back-button:hover, .reset-button:hover, .export-button:hover {
+            background: #cc66ff;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="archive">
+        <h1>🧠 LORE ECHO ARCHIVE</h1>
+        <p>Recovered signals echo in silence…</p>
+        <ul class="echo-list" id="echoList"></ul>
+
+        <div>
+            <a href="/" class="back-button">Return to Garden</a>
+            <button class="reset-button" onclick="resetEchoMemory()">Reset Memory</button>
+            <button class="export-button" onclick="exportEchoLog()">Export Echo Log</button>
+        </div>
+    </div>
+
+    <script>
+        const echoList = document.getElementById("echoList");
+        const echoes = JSON.parse(localStorage.getItem("unlockedLoreEchoes")) || [];
+
+        if (echoes.length === 0) {
+            echoList.innerHTML = "<li><em>No echoes recovered… yet.</em></li>";
+        } else {
+            echoes.forEach((echo, index) => {
+                const li = document.createElement("li");
+                li.textContent = `ECHO ${index + 1}: ${echo}`;
+                echoList.appendChild(li);
+            });
+        }
+
+        function resetEchoMemory() {
+            if (confirm("Are you sure you want to forget all echoes?")) {
+                localStorage.removeItem("unlockedLoreEchoes");
+                location.reload();
+            }
+        }
+
+        function exportEchoLog() {
+            let content = "Glitch Bloom: Echo Memory Dump\n-------------------------------\n";
+            echoes.forEach((echo, index) => {
+                content += `ECHO ${index + 1}: ${echo}\n`;
+            });
+
+            const blob = new Blob([content], { type: "text/plain" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "glitch_bloom_echo_log.txt";
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>

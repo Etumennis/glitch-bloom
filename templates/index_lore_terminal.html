@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Glitch Bloom</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/lore_echo.css">
+    <style>
+        .lore-terminal-btn {
+            display: none;
+            margin-top: 20px;
+            background: #1b001f;
+            color: #cc66ff;
+            font-family: monospace;
+            padding: 10px 20px;
+            border: 2px dashed #7f00ff;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .terminal-popup {
+            display: none;
+            position: fixed;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0b0013;
+            border: 2px solid #7f00ff;
+            padding: 20px;
+            color: #cc66ff;
+            font-family: monospace;
+            width: 90%;
+            max-width: 500px;
+            z-index: 1000;
+            box-shadow: 0 0 10px #cc66ff;
+            animation: flickerIn 0.5s ease-in-out;
+        }
+        .terminal-popup p {
+            white-space: pre-wrap;
+        }
+        .terminal-popup a {
+            color: #cc66ff;
+            text-decoration: underline;
+        }
+        .terminal-popup .close-btn {
+            background: none;
+            border: none;
+            color: #cc66ff;
+            float: right;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+        @keyframes flickerIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-screen">
+        <img src="/static/img/loading_screen.gif" alt="Loading...">
+    </div>
+
+    <canvas id="plantCanvas" width="64" height="64"></canvas>
+
+    <button class="lore-terminal-btn" id="openLoreTerminal">🧠 ACCESS LORE TERMINAL</button>
+
+    <div class="terminal-popup" id="terminalPopup">
+        <button class="close-btn" onclick="document.getElementById('terminalPopup').style.display='none'">✖</button>
+        <p id="terminalText">[BOOTING ARCHIVE INTERFACE...]
+
+LINK: <a href="/archive" target="_blank">View Echo Archive</a></p>
+    </div>
+
+    <div class="kofi-button">
+        <a href="https://ko-fi.com/escapetheglitch" target="_blank" class="glitch-button">
+            ☕ STABILIZE THIS REALITY
+        </a>
+        <p class="support-text">Support the Bloom to unlock rare mutations</p>
+    </div>
+
+    <script src="/scripts/plant_animation.js"></script>
+    <script src="/scripts/lore_echo_multi.js"></script>
+    <script>
+        const bloomTriggered = true;
+        displayLoreEcho(bloomTriggered);
+
+        // Show lore terminal if plant stage is 2 (fully grown)
+        const plantData = JSON.parse(localStorage.getItem("plantData")) || {};
+        if (plantData.plantStage === 2) {
+            document.getElementById("openLoreTerminal").style.display = "inline-block";
+        }
+
+        document.getElementById("openLoreTerminal").addEventListener("click", () => {
+            const popup = document.getElementById("terminalPopup");
+            popup.style.display = "block";
+
+            let text = "[BOOTING ARCHIVE INTERFACE...]
+
+LINK: ";
+            let index = 0;
+            const target = document.getElementById("terminalText");
+            target.textContent = "";
+            const interval = setInterval(() => {
+                if (index < text.length) {
+                    target.textContent += text[index];
+                    index++;
+                } else {
+                    clearInterval(interval);
+                    target.innerHTML += '<a href="/archive" target="_blank">View Echo Archive</a>';
+                }
+            }, 40);
+        });
+    </script>
+</body>
+</html>

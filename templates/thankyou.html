@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🌱 Glitch Bloom Unlocked</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="reward-screen">
+        <h1>✨ RARE SEED UNLOCKED ✨</h1>
+        <p>Your support has stabilized a new anomaly.</p>
+        <p>A rare Glitch Bloom seed has been planted in your name.</p>
+        <canvas id="rewardCanvas" width="64" height="64"></canvas>
+        <a href="/" class="glitch-button">Return to Garden</a>
+    </div>
+
+    <script>
+        const canvas = document.getElementById("rewardCanvas");
+        const ctx = canvas.getContext("2d");
+        const img = new Image();
+        img.src = "/static/sprites/glitch_bloom_sheet.png";
+        img.onload = () => {
+            ctx.drawImage(img, 2 * 64, 0, 64, 64, 0, 0, 64, 64);
+        };
+    </script>
+</body>
+</html>

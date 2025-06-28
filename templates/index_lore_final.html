@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Glitch Bloom</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/lore_echo.css">
+</head>
+<body>
+    <div class="loading-screen">
+        <img src="/static/img/loading_screen.gif" alt="Loading...">
+    </div>
+
+    <canvas id="plantCanvas" width="64" height="64"></canvas>
+
+    <div class="kofi-button">
+        <a href="https://ko-fi.com/escapetheglitch" target="_blank" class="glitch-button">
+            ☕ STABILIZE THIS REALITY
+        </a>
+        <p class="support-text">Support the Bloom to unlock rare mutations</p>
+    </div>
+
+    <script src="/scripts/plant_animation.js"></script>
+    <script src="/scripts/lore_echo.js"></script>
+    <script>
+        const bloomTriggered = true;
+        displayLoreEcho(bloomTriggered);
+    </script>
+</body>
+</html>

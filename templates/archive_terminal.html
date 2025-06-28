@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🧠 Echo Archive Terminal</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        body {
+            background-color: #0a0013;
+            color: #cc66ff;
+            font-family: "Courier New", monospace;
+            padding: 40px;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        .terminal {
+            border: 2px dashed #7f00ff;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            background: #0b001a;
+            box-shadow: 0 0 8px #7f00ff;
+            position: relative;
+        }
+        .scanlines::before {
+            content: "";
+            pointer-events: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-image: repeating-linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0.05),
+                rgba(255, 255, 255, 0.05) 1px,
+                transparent 1px,
+                transparent 3px
+            );
+            z-index: 1;
+        }
+        .typed {
+            white-space: pre-wrap;
+            min-height: 200px;
+            z-index: 2;
+            position: relative;
+        }
+        .back-button {
+            margin-top: 30px;
+            display: inline-block;
+            background: #7f00ff;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border: 2px solid #cc66ff;
+            border-radius: 8px;
+        }
+        .back-button:hover {
+            background: #cc66ff;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal scanlines">
+        <div id="typedContent" class="typed"></div>
+        <a href="/" class="back-button">↩ Return to Garden</a>
+    </div>
+
+    <script>
+        const echoes = JSON.parse(localStorage.getItem("unlockedLoreEchoes")) || [];
+        const container = document.getElementById("typedContent");
+        let fullText = ">> REPLAYING ARCHIVE MEMORY...\n\n";
+
+        if (echoes.length === 0) {
+            fullText += "[ No echoes recovered yet. Awaiting bloom... ]\n";
+        } else {
+            echoes.forEach((echo, i) => {
+                fullText += `ECHO ${String(i + 1).padStart(2, '0')}: ${echo}\n`;
+            });
+        }
+
+        let i = 0;
+        function typeLine() {
+            if (i < fullText.length) {
+                container.textContent += fullText.charAt(i);
+                i++;
+                setTimeout(typeLine, 20);
+            }
+        }
+
+        typeLine();
+    </script>
+</body>
+</html>
